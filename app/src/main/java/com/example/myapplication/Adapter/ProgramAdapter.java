@@ -16,12 +16,12 @@ import java.util.List;
 import com.example.myapplication.R;
 import com.example.myapplication.DataBase.SportProgram;
 
-public class SportProgAdapter extends RecyclerView.Adapter<SportProgAdapter.ProgramsViewHolder> {
+public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ProgramsViewHolder> {
 
     private final Context context;
     private final List<SportProgram> programList;
 
-    public SportProgAdapter(Context mCtx, List<SportProgram> programList) {
+    public ProgramAdapter(Context mCtx, List<SportProgram> programList) {
         this.context = mCtx;
         this.programList = programList;
     }

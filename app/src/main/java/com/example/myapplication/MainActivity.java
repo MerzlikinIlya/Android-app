@@ -1,6 +1,6 @@
 package com.example.myapplication;
 
-import static com.example.myapplication.Fragment.SportProgFrag.TAG_DIALOG_PROGRAM_SAVE;
+import static com.example.myapplication.Fragment.ProgramFrag.TAG_DIALOG_PROGRAM_SAVE;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
@@ -8,20 +8,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 
+import com.example.myapplication.Fragment.ProgramFrag;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import com.example.myapplication.Adapter.SportProgAdapter;
+
+import com.example.myapplication.Adapter.ProgramAdapter;
 import com.example.myapplication.DataBase.DBClient;
-import com.example.myapplication.DataBase.SportProgram;
-import com.example.myapplication.Fragment.SportProgFrag;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,13 +43,13 @@ public class MainActivity extends AppCompatActivity {
                 .getAll()
                 // поток интерфейса UI - наблюдает за изменениями Flowable данных
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(tasks -> {
-                    SportProgAdapter adapter = new SportProgAdapter(MainActivity.this, tasks);
+                .subscribe(programs -> {
+                    ProgramAdapter adapter = new ProgramAdapter(MainActivity.this, programs);
                     recyclerView.setAdapter(adapter);
                 });
     }
     private void showDialog() {
-        DialogFragment dialogFragment = new SportProgFrag();
+        DialogFragment dialogFragment = new ProgramFrag();
         dialogFragment.show(getSupportFragmentManager(), TAG_DIALOG_PROGRAM_SAVE);
     }
 }
