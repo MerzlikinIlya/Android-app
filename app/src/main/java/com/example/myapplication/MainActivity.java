@@ -8,7 +8,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
+
+import com.example.myapplication.DataBase.SportProgram;
 import com.example.myapplication.Fragment.ProgramFrag;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -35,7 +38,17 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(v -> showDialog());
+
+        ProgramAdapter.OnNoteListener stateClickListener = new ProgramAdapter.OnNoteListener() {
+            @Override
+            public void onNoteClick(SportProgram sportProgram, int position) {
+
+                DialogFragment dialogFragment = new ProgramFrag();
+                dialogFragment.show(getSupportFragmentManager(), TAG_DIALOG_PROGRAM_SAVE);
+            }
+        };
         //Log.d("RRRR","onCreate()");
+
         Disposable disposable = DBClient
                 .getInstance(getApplicationContext())
                 .getAppDatabase()
@@ -44,12 +57,15 @@ public class MainActivity extends AppCompatActivity {
                 // поток интерфейса UI - наблюдает за изменениями Flowable данных
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(programs -> {
-                    ProgramAdapter adapter = new ProgramAdapter(MainActivity.this, programs);
+                    ProgramAdapter adapter = new ProgramAdapter(MainActivity.this, programs,stateClickListener);
                     recyclerView.setAdapter(adapter);
                 });
     }
+
     private void showDialog() {
         DialogFragment dialogFragment = new ProgramFrag();
         dialogFragment.show(getSupportFragmentManager(), TAG_DIALOG_PROGRAM_SAVE);
     }
+
+
 }

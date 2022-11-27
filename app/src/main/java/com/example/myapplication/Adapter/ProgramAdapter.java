@@ -20,10 +20,14 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.Programs
 
     private final Context context;
     private final List<SportProgram> programList;
+    private final OnNoteListener onClickListener;
 
-    public ProgramAdapter(Context mCtx, List<SportProgram> programList) {
+   // private final List<State> states;
+    public ProgramAdapter(Context mCtx, List<SportProgram> programList,OnNoteListener onClickListener ) {
         this.context = mCtx;
         this.programList = programList;
+        this.onClickListener = onClickListener;
+
     }
 
 
@@ -42,6 +46,16 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.Programs
         holder.textViewName.setText(t.getName());
         holder.textViewDesc.setText(t.getDesc());
 
+
+        // обработка нажатия
+        holder.itemView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v)
+            {
+                // вызываем метод слушателя, передавая ему данные
+                onClickListener.onNoteClick(t, position);
+            }
+        });
     }
 
     @Override
@@ -49,7 +63,7 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.Programs
         return programList.size();
     }
 
-    static class ProgramsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    static class ProgramsViewHolder extends RecyclerView.ViewHolder  {
 
         TextView textViewName, textViewDesc;
 
@@ -58,17 +72,12 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.Programs
 
             textViewName = itemView.findViewById(R.id.textViewName);
             textViewDesc = itemView.findViewById(R.id.textViewDesc);
-
-
-
-            itemView.setOnClickListener(this);
         }
 
-        @Override
-        public void onClick(View view) {
 
-        }
     }
-
+    public interface OnNoteListener{
+        void onNoteClick(SportProgram sportProgram,int position);
+    }
 
 }
