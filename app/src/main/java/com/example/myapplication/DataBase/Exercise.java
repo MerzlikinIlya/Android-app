@@ -24,11 +24,10 @@ public class Exercise {
 
 
 
-    public Exercise(String name, String desc,int amount, int repeats, int time) {
+    public Exercise(String name, String desc, int time) {
         this.name = name;
         this.desc = desc;
-        this.amount = amount;
-        this.repeats = repeats;
+
         this.time = time;
     }
     public int getId() {
@@ -52,19 +51,6 @@ public class Exercise {
         this.desc = desc;
     }
 
-    public int getAmount() {
-        return amount;
-    }
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-    public int getRepeats() {
-        return repeats;
-    }
-    public void setRepeats(int repeats) {
-        this.repeats = repeats;
-    }
 
     public int getTime() {
         return time;

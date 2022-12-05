@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.DataBase.Exercise;
 import com.example.myapplication.DataBase.SportProgram;
 import com.example.myapplication.R;
 
@@ -18,13 +19,13 @@ import java.util.List;
 public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ProgramsViewHolder> {
 
     private final Context context;
-    private final List<SportProgram> programList;
+    private final List<Exercise> exerciseList;
     private final OnNoteListener onClickListener;
 
 
-    public ExerciseAdapter(Context mCtx, List<SportProgram> programList, OnNoteListener onClickListener ) {
+    public ExerciseAdapter(Context mCtx, List<Exercise> exerciseList, OnNoteListener onClickListener ) {
         this.context = mCtx;
-        this.programList = programList;
+        this.exerciseList = exerciseList;
         this.onClickListener = onClickListener;
 
     }
@@ -41,7 +42,7 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Progra
 
     @Override
     public void onBindViewHolder(ProgramsViewHolder holder, int position) {
-        SportProgram t = programList.get(position);
+        Exercise t = exerciseList.get(position);
         holder.textViewName.setText(t.getName());
 
 
@@ -59,7 +60,7 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Progra
 
     @Override
     public int getItemCount() {
-        return programList.size();
+        return exerciseList.size();
     }
 
     static class ProgramsViewHolder extends RecyclerView.ViewHolder  {
@@ -74,7 +75,7 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Progra
 
     }
     public interface OnNoteListener{
-        void onNoteClick(SportProgram sportProgram,int position);
+        void onNoteClick(Exercise exercise,int position);
     }
 
 }

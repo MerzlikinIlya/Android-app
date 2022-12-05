@@ -14,7 +14,7 @@ public class DBClient {
     private DBClient(Context mCtx) {
         this.mCtx = mCtx;
         //Создание БД - MyToDos
-        mainDatabase = Room.databaseBuilder(mCtx, DB.class, "MySportPrograms").build();
+        mainDatabase = Room.databaseBuilder(mCtx, DB.class, "MySportPrograms").fallbackToDestructiveMigration().build();
     }
 
     public static DBClient getInstance(Context mCtx) {
