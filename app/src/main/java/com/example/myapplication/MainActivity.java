@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import static com.example.myapplication.Fragment.ExerciseFragment.TAG_DIALOG_EXERCISE_SAVE;
 import static com.example.myapplication.Fragment.ProgramFrag.TAG_DIALOG_PROGRAM_SAVE;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,10 +9,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 
 import com.example.myapplication.DataBase.SportProgram;
+import com.example.myapplication.Fragment.ExerciseFragment;
 import com.example.myapplication.Fragment.ProgramFrag;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -26,25 +30,27 @@ public class MainActivity extends AppCompatActivity {
 
 
     private RecyclerView recyclerView;
-
+    private Button buttonAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
+        View view = getLayoutInflater().inflate(R.layout.sport_prog, null);
+        buttonAdd = view.findViewById(R.id.btnAdd);
         recyclerView = findViewById(R.id.recyclerview_program);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(v -> showDialog());
-
+        buttonAdd.setOnClickListener(v -> showElseDialog());
         ProgramAdapter.OnNoteListener stateClickListener = new ProgramAdapter.OnNoteListener() {
             @Override
             public void onNoteClick(SportProgram sportProgram, int position) {
 
                 DialogFragment dialogFragment = new ProgramFrag();
                 dialogFragment.show(getSupportFragmentManager(), TAG_DIALOG_PROGRAM_SAVE);
+
             }
         };
         //Log.d("RRRR","onCreate()");
@@ -52,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         Disposable disposable = DBClient
                 .getInstance(getApplicationContext())
                 .getAppDatabase()
-                .taskDao()
+                .SportProgramDao()
                 .getAll()
                 // поток интерфейса UI - наблюдает за изменениями Flowable данных
                 .observeOn(AndroidSchedulers.mainThread())
@@ -61,7 +67,10 @@ public class MainActivity extends AppCompatActivity {
                     recyclerView.setAdapter(adapter);
                 });
     }
-
+    private void showElseDialog() {
+        DialogFragment dialogFragment = new ExerciseFragment();
+        dialogFragment.show(getSupportFragmentManager(), TAG_DIALOG_EXERCISE_SAVE);
+    }
     private void showDialog() {
         DialogFragment dialogFragment = new ProgramFrag();
         dialogFragment.show(getSupportFragmentManager(), TAG_DIALOG_PROGRAM_SAVE);

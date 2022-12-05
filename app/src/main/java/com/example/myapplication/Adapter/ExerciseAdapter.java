@@ -10,20 +10,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.DataBase.SportProgram;
+import com.example.myapplication.R;
+
 import java.util.List;
 
-
-import com.example.myapplication.R;
-import com.example.myapplication.DataBase.SportProgram;
-
-public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ProgramsViewHolder> {
+public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ProgramsViewHolder> {
 
     private final Context context;
     private final List<SportProgram> programList;
     private final OnNoteListener onClickListener;
 
-   // private final List<State> states;
-    public ProgramAdapter(Context mCtx, List<SportProgram> programList,OnNoteListener onClickListener ) {
+
+    public ExerciseAdapter(Context mCtx, List<SportProgram> programList, OnNoteListener onClickListener ) {
         this.context = mCtx;
         this.programList = programList;
         this.onClickListener = onClickListener;
@@ -35,7 +34,7 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.Programs
     @NonNull
     @Override
     public ProgramsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_program_recycler, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_exercise_recycler, parent, false);
         return new ProgramsViewHolder(view);
     }
 
@@ -44,7 +43,7 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.Programs
     public void onBindViewHolder(ProgramsViewHolder holder, int position) {
         SportProgram t = programList.get(position);
         holder.textViewName.setText(t.getName());
-        holder.textViewDesc.setText(t.getDesc());
+
 
 
         // обработка нажатия
@@ -65,13 +64,11 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.Programs
 
     static class ProgramsViewHolder extends RecyclerView.ViewHolder  {
 
-        TextView textViewName, textViewDesc;
+        TextView textViewName;
 
         public ProgramsViewHolder(View itemView) {
             super(itemView);
-
             textViewName = itemView.findViewById(R.id.textViewName);
-            textViewDesc = itemView.findViewById(R.id.textViewDesc);
         }
 
 
