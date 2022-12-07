@@ -1,6 +1,7 @@
 package com.example.myapplication.Adapter;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,7 +42,7 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Progra
 
 
     @Override
-    public void onBindViewHolder(ProgramsViewHolder holder, int position) {
+    public void onBindViewHolder(ProgramsViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Exercise t = exerciseList.get(position);
         holder.textViewName.setText(t.getName());
 

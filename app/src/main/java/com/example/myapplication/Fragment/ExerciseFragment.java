@@ -43,26 +43,30 @@ public class ExerciseFragment extends DialogFragment {
         View view = getActivity().getLayoutInflater().inflate(R.layout.add_exercise, null);
         final EditText nameEx = view.findViewById(R.id.Name);
         final EditText time = view.findViewById(R.id.Time);
+        final EditText amount = view.findViewById(R.id.Amount);
+        final EditText repeats = view.findViewById(R.id.Repeats);
         final EditText desc = view.findViewById(R.id.Descriptions);
 
         alertDialogBuilder.setView(view)
                 .setTitle(getString(R.string.addtasktitle))
                 .setPositiveButton(R.string.save, (dialog, which) -> saveExercise(nameEx.getText().toString(),
                                                                                   time.getText().toString(),
+                                                                                  amount.getText().toString(),
+                                                                                  repeats.getText().toString(),
                                                                                   desc.getText().toString()))
                 .setNegativeButton(R.string.cancel, (dialog, which) -> dialog.cancel());
 
         return alertDialogBuilder.create();
     }
 
-    private void saveExercise(String nameEx, String time, String desc  ) {
-        if (TextUtils.isEmpty(nameEx) || TextUtils.isEmpty(time)|| TextUtils.isEmpty(desc) ) {
+    private void saveExercise(String nameEx, String time,String amount,String repeats, String desc  ) {
+        if (TextUtils.isEmpty(nameEx) || TextUtils.isEmpty(time)|| TextUtils.isEmpty(amount)|| TextUtils.isEmpty(repeats)|| TextUtils.isEmpty(desc) ) {
             return;
         }
 
         new Thread(() -> {DBClient.getInstance(context).getAppDatabase()
                 .ExersiceDAO()
-                .insert(new Exercise(nameEx,desc,Integer.valueOf(time)));
+                .insert(new Exercise(nameEx,desc,Integer.valueOf(amount),Integer.valueOf(repeats),Integer.valueOf(time)));
         }).start();
 
 

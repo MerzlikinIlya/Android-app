@@ -11,36 +11,32 @@ import java.util.List;
 public class SportProgram {
 
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    public int idProgram;
 
     @ColumnInfo
     private String name;
 
     @ColumnInfo
     private String desc;
-    //@ColumnInfo
-    //private List<String> listPrograms;
+
 
 
     public SportProgram(String name, String desc) {
         this.name = name;
         this.desc = desc;
-        //this.listPrograms = listPrograms;
 
     }
-    public int getId() {
-        return id;
-    }
+    public int getIdProgram() {return idProgram;}
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdProgram(int id) {
+        this.idProgram = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String task) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -51,6 +47,5 @@ public class SportProgram {
     public void setDesc(String desc) {
         this.desc = desc;
     }
-    //public List<String> getListPrograms() {return listPrograms;}
-    //public void setListPrograms(List<String> listPrograms){this.listPrograms = listPrograms;}
+
 }

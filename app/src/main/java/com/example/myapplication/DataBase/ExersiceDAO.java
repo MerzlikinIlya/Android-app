@@ -15,7 +15,7 @@ public interface ExersiceDAO {
 
 
         @Query("SELECT * FROM exercise")
-        Flowable<List<Exercise>> getAll();
+        Flowable<List<Exercise>> getExercise();
 
         @Insert
         void insert(Exercise ex);

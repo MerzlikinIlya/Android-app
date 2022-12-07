@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey;
 public class Exercise {
 
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    public int idExercise;
 
     @ColumnInfo
     private String name;
@@ -24,23 +24,25 @@ public class Exercise {
 
 
 
-    public Exercise(String name, String desc, int time) {
+
+
+    public Exercise(String name, String desc,int amount,int repeats, int time ) {
         this.name = name;
         this.desc = desc;
-
+        this.amount = amount;
+        this.repeats = repeats;
         this.time = time;
+
     }
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
+    public int getIdExercise() {return idExercise;}
+    public void setIdExercise(int id) {
+        this.idExercise = id;
     }
 
     public String getName() {
         return name;
     }
-    public void setName(String task) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -51,6 +53,19 @@ public class Exercise {
         this.desc = desc;
     }
 
+    public int getAmount() {
+        return amount;
+    }
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public int getRepeats() {
+        return repeats;
+    }
+    public void setRepeats(int repeats) {
+        this.repeats = repeats;
+    }
 
     public int getTime() {
         return time;

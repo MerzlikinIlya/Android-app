@@ -1,6 +1,7 @@
 package com.example.myapplication.Adapter;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 
+import com.example.myapplication.DataBase.ProgramWithExercise;
 import com.example.myapplication.R;
 import com.example.myapplication.DataBase.SportProgram;
 
@@ -23,7 +25,7 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.Programs
     private final OnNoteListener onClickListener;
 
    // private final List<State> states;
-    public ProgramAdapter(Context mCtx, List<SportProgram> programList,OnNoteListener onClickListener ) {
+    public ProgramAdapter(Context mCtx, List<SportProgram> programList, OnNoteListener onClickListener ) {
         this.context = mCtx;
         this.programList = programList;
         this.onClickListener = onClickListener;
@@ -41,7 +43,7 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.Programs
 
 
     @Override
-    public void onBindViewHolder(ProgramsViewHolder holder, int position) {
+    public void onBindViewHolder(ProgramsViewHolder holder, @SuppressLint("RecyclerView") int position) {
         SportProgram t = programList.get(position);
         holder.textViewName.setText(t.getName());
         holder.textViewDesc.setText(t.getDesc());
